@@ -74,8 +74,8 @@ To customize the input or output file paths, edit the convertTiffToPdf function 
 
 ## Libraries Used
 
-pdf-lib: For creating and manipulating PDF files.
-sharp: For converting TIFF images to a format suitable for embedding in PDFs.
+- **pdf-lib:** For creating and manipulating PDF files.
+- **sharp:** For converting TIFF images to a format suitable for embedding in PDFs.
 
 ## Contributing
 Contributions to the project are welcome: Fork the project. Create your feature branch (git checkout -b feature/AmazingFeature). Commit your changes (git commit -m 'Add some AmazingFeature'). Push to the branch (git push origin feature/AmazingFeature). Open a pull request.
@@ -83,7 +83,5 @@ Contributions to the project are welcome: Fork the project. Create your feature 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE][MIT] file for details.
-
-
 
 [MIT]: <https://github.com/naturuplift/ConvertTIFFtoPDF/blob/main/LICENSE>
