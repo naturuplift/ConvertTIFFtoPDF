@@ -2,6 +2,27 @@
 const fs = require('fs');
 const { PDFDocument } = require('pdf-lib');
 const sharp = require('sharp');
+const inquirer = require('inquirer');
+
+// function to prompt user for number of pages
+async function promptForNumberOfPages() {
+  const answers = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'pages',
+      message: 'How many TIFF pages do you want to convert to PDF?',
+      validate: (input) => {
+        const pageNum = parseInt(input, 10);
+        if (isNaN(pageNum) || pageNum < 1) {
+          return 'Please enter a valid number greater than 0.';
+        }
+        return true;
+      }
+    }
+  ]);
+
+  return answers.pages; // This will be a string
+}
 
 // main function to convert TIFF to PDF
 async function convertTiffToPdf(pages) {
@@ -44,7 +65,7 @@ async function convertTiffToPdf(pages) {
       // Write the PDF to a file
       fs.writeFileSync(pdfPath, pdfBytes);
 
-      console.log(pdfPath)
+      // console.log(pdfPath)
 
       // Dynamically add the created PDF path to the filePaths array
       filePaths.push(pdfPath);
@@ -55,7 +76,7 @@ async function convertTiffToPdf(pages) {
     }
   }
 
-  console.log(filePaths)
+  // console.log(filePaths)
 
   // Merge pages once all pages converted to individual pdf's
   if(filePaths.length > 0) {
@@ -88,4 +109,12 @@ async function mergePdfs(paths) {
   console.log('PDFs merged successfully!');
 }
 
-convertTiffToPdf(7);
+// Main execution function
+async function main() {
+  // Get number of pages from user
+  const numberOfPages = await promptForNumberOfPages();
+  // Convert to number and call the function
+  await convertTiffToPdf(parseInt(numberOfPages, 10));
+}
+
+main();

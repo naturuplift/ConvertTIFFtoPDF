@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/naturuplift/ConvertTIFFtoPDF#readme",
   "dependencies": {
+    "inquirer": "^8.2.4",
     "pdf-lib": "^1.17.1",
     "sharp": "^0.33.2"
   }
