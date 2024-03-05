@@ -66,8 +66,8 @@ To convert TIFF files to PDF and merge them into a single document, follow these
 Replace app.js with the actual entry point of your application if different.
 
 3.  The application will convert each TIFF file to a PDF, then merge all resulting PDFs into a single file named merged.pdf in the assets directory.
-![image](https://github.com/naturuplift/ConvertTIFFtoPDF/assets/23546356/9860fb19-c3e0-41cb-98a4-23d180171d3b)
 
+![image](https://github.com/naturuplift/ConvertTIFFtoPDF/assets/23546356/9860fb19-c3e0-41cb-98a4-23d180171d3b)
 
 ### Customizing File Paths
 To customize the input or output file paths, edit the convertTiffToPdf function in your script, modifying the tiffPath and pdfPath variables as needed.
