@@ -3,49 +3,53 @@ const fs = require('fs');
 const { PDFDocument } = require('pdf-lib');
 const sharp = require('sharp');
 
+// number of pages
+const pages = 1; // for File
+
 // main function to convert TIFF to PDF
-async function convertTiffToPdf(tiffPath, pdfPath) {
-  try {
-    // Convert TIFF to PNG using sharp
-    const pngBuffer = await sharp(tiffPath)
-      .png()
-      .toBuffer();
+async function convertTiffToPdf() {
+  // convert each page
+  for (let index = 1; index < pages+1; index++) {
 
-    // Create a new PDF document
-    const pdfDoc = await PDFDocument.create();
+    // Example usage
+    const tiffPath = `./assets/File ${index}.tif`;
+    const pdfPath = `./assets/File ${index}.pdf`;
+    
+    try {
+      // Convert TIFF to PNG using sharp
+      const pngBuffer = await sharp(tiffPath)
+        .png()
+        .toBuffer();
 
-    // Embed the PNG image in the PDF
-    const pngImage = await pdfDoc.embedPng(pngBuffer);
+      // Create a new PDF document
+      const pdfDoc = await PDFDocument.create();
 
-    // Add a page to the PDF that's the same size as the image
-    const { width, height } = pngImage.scale(1);
-    const page = pdfDoc.addPage([width, height]);
+      // Embed the PNG image in the PDF
+      const pngImage = await pdfDoc.embedPng(pngBuffer);
 
-    // Draw the image on the page
-    page.drawImage(pngImage, {
-      x: 0,
-      y: 0,
-      width: width,
-      height: height,
-    });
+      // Add a page to the PDF that's the same size as the image
+      const { width, height } = pngImage.scale(1);
+      const page = pdfDoc.addPage([width, height]);
 
-    // Serialize the PDF to bytes (a Uint8Array)
-    const pdfBytes = await pdfDoc.save();
+      // Draw the image on the page
+      page.drawImage(pngImage, {
+        x: 0,
+        y: 0,
+        width: width,
+        height: height,
+      });
 
-    // Write the PDF to a file
-    fs.writeFileSync(pdfPath, pdfBytes);
+      // Serialize the PDF to bytes (a Uint8Array)
+      const pdfBytes = await pdfDoc.save();
 
-    console.log('TIFF to PDF conversion completed successfully.');
-  } catch (error) {
-    console.error('Error converting TIFF to PDF:', error);
-  }
+      // Write the PDF to a file
+      fs.writeFileSync(pdfPath, pdfBytes);
+
+      console.log('TIFF to PDF conversion completed successfully.');
+    } catch (error) {
+      console.error('Error converting TIFF to PDF:', error);
+    }
+  } 
 }
 
-// Example usage
-const tiffPath = './assets/Completion of Financial Application Form for Long Term Care Services.tiff';
-const pdfPath = './assets/Completion of Financial Application Form for Long Term Care Services.pdf';
-
-// const tiffPath = './assets/Enduring Power of Attorney.tiff';
-// const pdfPath = './assets/Enduring Power of Attorney.pdf';
-
-convertTiffToPdf(tiffPath, pdfPath);
+convertTiffToPdf();
