@@ -1,0 +1,23 @@
+{
+  "name": "convert-tiff-to-pdf",
+  "version": "1.0.0",
+  "description": "application to convert tiff file to pdf",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naturuplift/ConvertTIFFtoPDF.git"
+  },
+  "author": "Arnaldo Sepulveda",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/naturuplift/ConvertTIFFtoPDF/issues"
+  },
+  "homepage": "https://github.com/naturuplift/ConvertTIFFtoPDF#readme",
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "sharp": "^0.33.2"
+  }
+}
